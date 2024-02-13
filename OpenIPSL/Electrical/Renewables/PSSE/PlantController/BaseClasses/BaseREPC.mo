@@ -35,20 +35,30 @@ partial model BaseREPC
   Modelica.Blocks.Interfaces.RealOutput Qext "Reactive Power output signal"
     annotation (Placement(transformation(extent={{200,90},{220,110}})));
   Modelica.Blocks.Interfaces.RealOutput Pref "Real Power output signal"
-    annotation (Placement(transformation(extent={{200,-110},{220,-90}})));
+    annotation (Placement(transformation(extent={{200,-116},{220,-96}}),
+        iconTransformation(extent={{200,-116},{220,-96}})));
 
   Modelica.Blocks.Interfaces.RealInput p0 "Initial Active Power" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-120,-220})));
+        origin={-120,-220}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-140,-220})));
   Modelica.Blocks.Interfaces.RealInput q0 "Initial Reactive Power" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={120,-220})));
-  Modelica.Blocks.Interfaces.RealInput v0 "Initial Terminal Voltage Magnitude" annotation (Placement(transformation(
+        origin={120,-220}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-220})));
+  Modelica.Blocks.Interfaces.RealInput v0 "Initial Terminal Voltage Magnitude" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={0,-220}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={140,-220})));
   Modelica.Blocks.Interfaces.RealInput branch_ir "Measured Branch Real Current" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -116,17 +126,17 @@ equation
         Text(
           extent={{-80,60},{118,-60}},
           textColor={0,0,255},
-          textString="REPCA1"),
+          textString="REPC_"),
         Text(
-          extent={{-150,-164},{-90,-190}},
+          extent={{-170,-162},{-110,-188}},
           textColor={0,0,255},
           textString="P0"),
         Text(
-          extent={{-30,-164},{30,-190}},
+          extent={{110,-162},{170,-188}},
           textColor={0,0,255},
           textString="V0"),
         Text(
-          extent={{90,-164},{150,-190}},
+          extent={{-32,-162},{28,-188}},
           textColor={0,0,255},
           textString="Q0"),
         Text(

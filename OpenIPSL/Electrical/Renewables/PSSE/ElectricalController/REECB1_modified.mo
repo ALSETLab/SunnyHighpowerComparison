@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Renewables.PSSE.ElectricalController;
-model REECB1 "Electrical control model for large scale photovoltaic"
+model REECB1_modified "Electrical control model for large scale photovoltaic"
   extends
     OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.BaseClasses.BaseREECB(
      Iqcmd, Ipcmd);
@@ -139,13 +139,13 @@ model REECB1 "Electrical control model for large scale photovoltaic"
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{-246,144},{-226,164}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Iqh1, uMin=Iql1)
-    annotation (Placement(transformation(extent={{-126,144},{-106,164}})));
+    annotation (Placement(transformation(extent={{88,146},{108,166}})));
   Modelica.Blocks.Sources.RealExpression VREF0(y=Vref0)
     annotation (Placement(transformation(extent={{-286,120},{-266,140}})));
   Modelica.Blocks.Nonlinear.DeadZone dbd1_dbd2(uMax=dbd2, uMin=dbd1)
     annotation (Placement(transformation(extent={{-206,144},{-186,164}})));
   Modelica.Blocks.Math.Gain gain2(k=Kqv)
-    annotation (Placement(transformation(extent={{-166,144},{-146,164}})));
+    annotation (Placement(transformation(extent={{42,138},{62,158}})));
   NonElectrical.Continuous.SimpleLag simpleLag1(
     K=1,
     T=Tp,
@@ -161,7 +161,8 @@ model REECB1 "Electrical control model for large scale photovoltaic"
         origin={-286,50})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-72,-180},{-52,-160}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter5(uMax=Modelica.Constants.inf, uMin=0.01)
+  Modelica.Blocks.Nonlinear.Limiter limiter5(uMax=Modelica.Constants.inf, uMin=
+        0.0000000001)
     annotation (Placement(transformation(extent={{-132,-220},{-112,-200}})));
   Modelica.Blocks.Math.Add add8(k2=-1)
     annotation (Placement(transformation(extent={{-276,-176},{-256,-156}})));
@@ -188,10 +189,14 @@ model REECB1 "Electrical control model for large scale photovoltaic"
         origin={-230,-130})));
   Modelica.Blocks.Math.Product product6
     annotation (Placement(transformation(extent={{-190,-176},{-170,-156}})));
-  Modelica.Blocks.Sources.RealExpression VReF0(y=Vref0) annotation (Placement(
-        transformation(
-        extent={{-10,10},{10,-10}},
-        origin={-44,-32})));
+  Modelica.Blocks.Math.Add add3(k2=-1)
+    annotation (Placement(transformation(extent={{-90,138},{-70,158}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter6(uMax=dPmax, uMin=dPmin)
+    annotation (Placement(transformation(extent={{-54,138},{-34,158}})));
+  Modelica.Blocks.Continuous.Integrator integrator4(k=1/Tpord, y_start=0)
+    annotation (Placement(transformation(extent={{-12,138},{8,158}})));
+  Modelica.Blocks.Nonlinear.FixedDelay d(delayTime=0)
+    annotation (Placement(transformation(extent={{-146,144},{-126,164}})));
 protected
   parameter Real pfaref = p00/sqrt(p00^2 +q00^2) "Power Factor of choice.";
   parameter OpenIPSL.Types.Angle pfangle = if q00 > 0 then acos(pfaref) else -acos(pfaref);
@@ -217,13 +222,8 @@ equation
                             color={0,0,127}));
   connect(VREF0.y,add. u2) annotation (Line(points={{-265,130},{-252,130},{-252,
           148},{-248,148}},color={0,0,127}));
-  connect(dbd1_dbd2.y,gain2. u)
-    annotation (Line(points={{-185,154},{-168,154}}, color={0,0,127}));
   connect(add.y,dbd1_dbd2. u)
     annotation (Line(points={{-225,154},{-208,154}}, color={0,0,127}));
-  connect(gain2.y,limiter. u)
-    annotation (Line(points={{-145,154},{-128,154}},
-                                                 color={0,0,127}));
   connect(simpleLag1.y,product1. u1)
     annotation (Line(points={{-245,80},{-238,80}}, color={0,0,127}));
   connect(tan1.y,product1. u2) annotation (Line(points={{-245,50},{-238,50},{-238,
@@ -322,7 +322,8 @@ equation
   connect(Vt, simpleLag.u)
     annotation (Line(points={{-320,160},{-288,160}}, color={0,0,127}));
   connect(limiter.y, add6.u1)
-    annotation (Line(points={{-105,154},{228,154},{228,86}}, color={0,0,127}));
+    annotation (Line(points={{109,156},{216,156},{216,86},{228,86}},
+                                                             color={0,0,127}));
   connect(limiter5.y,division1. u2) annotation (Line(points={{-111,-210},{-86,-210},
           {-86,-176},{-74,-176}}, color={0,0,127}));
   connect(add8.y,limiter7. u)
@@ -365,8 +366,22 @@ equation
           {-212,-172},{-192,-172}}, color={0,0,127}));
   connect(product6.y, integrator3.u)
     annotation (Line(points={{-169,-166},{-154,-166}}, color={0,0,127}));
-  connect(VReF0.y, VFlag.u3)
-    annotation (Line(points={{-33,-32},{-4,-32},{-4,46}}, color={0,0,127}));
+  connect(VFlag.u3, limiter1.u) annotation (Line(points={{-4,46},{-10,46},{-10,
+          -64},{-170,-64},{-170,66},{-164,66}}, color={0,0,127}));
+  connect(add3.y, limiter6.u)
+    annotation (Line(points={{-69,148},{-56,148}},  color={0,0,127}));
+  connect(limiter6.y, integrator4.u)
+    annotation (Line(points={{-33,148},{-14,148}}, color={0,0,127}));
+  connect(integrator4.y, add3.u2) annotation (Line(points={{9,148},{26,148},{26,
+          112},{-102,112},{-102,142},{-92,142}},       color={0,0,127}));
+  connect(gain2.u, integrator4.y)
+    annotation (Line(points={{40,148},{9,148}},  color={0,0,127}));
+  connect(gain2.y, limiter.u) annotation (Line(points={{63,148},{76,148},{76,
+          156},{86,156}}, color={0,0,127}));
+  connect(dbd1_dbd2.y, d.u)
+    annotation (Line(points={{-185,154},{-148,154}}, color={0,0,127}));
+  connect(d.y, add3.u1)
+    annotation (Line(points={{-125,154},{-92,154}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>
 The REECB1 component used to represent the electrical controls of photovoltaic generation. The electrical controller actuates on the active and reactive power
@@ -392,4 +407,4 @@ are Vt, Pgen, and Qgen while the two inputs that could potentially be constant v
 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCPhotovoltaic]</a>.</li>
 </ul>
 </html>"));
-end REECB1;
+end REECB1_modified;

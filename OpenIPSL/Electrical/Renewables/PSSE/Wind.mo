@@ -167,13 +167,14 @@ equation
         points={{-37,10},{-34,10},{-34,-2.66667},{-21.3333,-2.66667}}, color={0,
           0,127}));
   connect(PlantController.Pref, RenewableController.Pref) annotation (Line(
-        points={{-37,-10},{-21.3333,-10},{-21.3333,-8}}, color={0,0,127}));
-  connect(PlantController.q0, RenewableController.q0) annotation (Line(points={{-46,-22},
-          {-46,-32},{-8,-32},{-8,-21.3333}},            color={0,0,127}));
-  connect(PlantController.v0, RenewableController.v0) annotation (Line(points={{-58,-22},
-          {-58,-30},{0,-30},{0,-21.3333}},            color={0,0,127}));
-  connect(PlantController.p0, RenewableController.p0) annotation (Line(points={{-70,-22},
-          {-70,-34},{-16,-34},{-16,-21.3333}},                    color={0,0,127}));
+        points={{-37,-10.6},{-21.3333,-10.6},{-21.3333,-8}},
+                                                         color={0,0,127}));
+  connect(PlantController.q0, RenewableController.q0) annotation (Line(points={{-58,-22},
+          {-58,-32},{-8,-32},{-8,-21.3333}},            color={0,0,127}));
+  connect(PlantController.v0, RenewableController.v0) annotation (Line(points={{-44,-22},
+          {-44,-30},{0,-30},{0,-21.3333}},            color={0,0,127}));
+  connect(PlantController.p0, RenewableController.p0) annotation (Line(points={{-72,-22},
+          {-72,-34},{-16,-34},{-16,-21.3333}},                    color={0,0,127}));
   connect(DriveTrain.wg, RenewableController.Wg) annotation (Line(points={{
           -51.1667,-75},{-32,-75},{-32,-13.3333},{-21.3333,-13.3333}},
                                                               color={0,0,127}));

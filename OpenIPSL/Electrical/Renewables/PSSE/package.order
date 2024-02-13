@@ -1,3 +1,4 @@
+PV_with_inputs
 BESS
 PV
 Wind
@@ -6,3 +7,6 @@ ElectricalController
 InverterInterface
 PlantController
 WindDriveTrain
+PV_with_inputs_FOR_PAPER
+PV_with_inputs_FOR_PAPER2
+PV_with_inputs_NO_OUTPUTS

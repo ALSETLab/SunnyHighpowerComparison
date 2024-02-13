@@ -46,9 +46,9 @@ partial model BaseREECB "Base renewable energy electrical controller model B"
             {300,300}}), graphics={Rectangle(extent={{-300,300},{300,-300}},
             lineColor={0,0,255}),
         Text(
-          extent={{-140,98},{160,-100}},
+          extent={{-160,112},{206,-114}},
           textColor={0,0,255},
-          textString="REECB1"),
+          textString="REEC_"),
         Text(
           extent={{-280,180},{-220,140}},
           textColor={0,0,255},

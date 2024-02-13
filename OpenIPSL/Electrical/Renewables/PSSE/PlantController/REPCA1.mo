@@ -198,7 +198,7 @@ equation
           114,-168},{114,-142},{142,-142},{142,-126},{152,-126}},
                                           color={255,0,255}));
   connect(FREQ_FLAG.y,Pref) annotation (Line(points={{175,-126},{198,-126},{198,
-          -100},{210,-100}},
+          -106},{210,-106}},
                       color={0,0,127}));
   connect(Pbranch.y,simpleLag. u)
     annotation (Line(points={{-141,-96},{-130,-96}},

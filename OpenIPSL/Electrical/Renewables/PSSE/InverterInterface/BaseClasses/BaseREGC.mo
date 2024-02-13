@@ -148,7 +148,7 @@ equation
           textString="P0"),  Text(
           extent={{-82,70},{98,-70}},
           textColor={0,0,255},
-          textString="REGCA")}),
+          textString="REGC_")}),
                               Diagram(
         coordinateSystem(extent={{-140,-140},{140,140}})),
     Documentation(info="<html>
